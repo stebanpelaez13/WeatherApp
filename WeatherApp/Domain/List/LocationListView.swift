@@ -24,16 +24,26 @@ struct LocationListView: View {
                     .font(.body)
             } else {
                 List(self.items) { item in
-                    Button(action: {
-                        self.router.navigateTo(.detail(item))
-                    }) {
-                        LocationItemView(item: item, searchText: self.searchText)
-                    }
+                    self.contentList(item: item)
                 }
                 .listStyle(PlainListStyle())
             }
         }
         .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
+    }
+    
+    @ViewBuilder func contentList(item: LocationItem) -> some View {
+        if #available(iOS 16.0, *) {
+            Button(action: {
+                self.router.navigateTo(.detail(item))
+            }) {
+                LocationItemView(item: item, searchText: self.searchText)
+            }
+        } else {
+            NavigationLink(destination: self.router.view(for: .detail(item))) {
+                LocationItemView(item: item, searchText: self.searchText)
+            }
+        }
     }
     
 }

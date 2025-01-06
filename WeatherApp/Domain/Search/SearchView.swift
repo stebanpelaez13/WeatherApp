@@ -26,6 +26,7 @@ struct SearchView: View {
             NavigationView {
                 self.contentSearch()
             }
+            .navigationViewStyle(.stack)
         }
     }
     
@@ -33,21 +34,29 @@ struct SearchView: View {
         LocationListView(emptyText: Constants.Messages.notMatches,
                          searchText: self.textObserver.debouncedText,
                          items: self.viewModel.locations)
-            .searchable(text: $textObserver.searchText)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: self.router.view(for: .favourites)) {
-                        Image(systemName: Constants.Images.startFill)
-                    }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink(destination: self.router.view(for: .favourites)) {
+                    Image(systemName: Constants.Images.startFill)
                 }
             }
-            .onReceive(textObserver.$debouncedText) { query in
-                
+        }
+        .navigationTitle(Constants.Messages.titleSearch)
+        .searchable(text: $textObserver.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: Constants.Messages.placeholder)
+        .onReceive(textObserver.$debouncedText) { query in
+            DispatchQueue.main.async {
+                self.viewModel.searchLocations(query: query)
             }
+        }
+        .environmentObject(self.router)
     }
     
 }
 
 #Preview {
-    return SearchView()
+    let manager = MockApiManager.shared
+    manager.mock = MockHelper.listLocation
+    
+    let viewModel = SearchViewModel(apiManager: manager)
+    return SearchView(viewModel: viewModel)
 }
