@@ -29,22 +29,20 @@ enum ConstantsMock {
     
     static let responseLocations = [
         [
-            "country": "ES",
+            "id": 714482,
             "name": "Madrid",
-            "_id": 600123,
-            "coord": [
-                "lat": 6.91231,
-                "lon": 10.1231
-            ] as [String: Any]
+            "region": "Madrid",
+            "country": "Spain",
+            "lat": 40.4,
+            "lon": -3.68
         ],
         [
-            "country": "ES",
+            "id": 698739,
             "name": "Barcelona",
-            "_id": 918231,
-            "coord": [
-                "lat": 12.91231,
-                "lon": -21.12319
-            ] as [String: Any]
+            "region": "Catalonia",
+            "country": "Spain",
+            "lat": 41.38,
+            "lon": 2.18
         ]
     ]
     

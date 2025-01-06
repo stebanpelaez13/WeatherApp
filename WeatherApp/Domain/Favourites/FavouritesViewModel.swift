@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class FavouritesViewModel: ObservableObject {
+class FavouritesViewModel: BaseViewModel, ObservableObject {
     
     @Published var favourites: [LocationItem] = []
 
