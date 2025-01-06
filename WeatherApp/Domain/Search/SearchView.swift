@@ -12,6 +12,8 @@ struct SearchView: View {
     @StateObject private var textObserver = TextFieldObserver()
     @StateObject private var router = SearchRouter()
     
+    @StateObject var viewModel: SearchViewModel = SearchViewModel()
+    
     var body: some View {
         if #available(iOS 16.0, *) {
             NavigationStack(path: $router.path) {
@@ -28,12 +30,14 @@ struct SearchView: View {
     }
     
     @ViewBuilder func contentSearch() -> some View {
-        Text("Search")
+        LocationListView(emptyText: Constants.Messages.notMatches,
+                         searchText: self.textObserver.debouncedText,
+                         items: self.viewModel.locations)
             .searchable(text: $textObserver.searchText)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: self.router.view(for: .favourites)) {
-                        Image(systemName: "star.fill")
+                        Image(systemName: Constants.Images.startFill)
                     }
                 }
             }

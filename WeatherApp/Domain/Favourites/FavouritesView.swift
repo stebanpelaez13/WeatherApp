@@ -9,10 +9,11 @@ import SwiftUI
 
 struct FavouritesView: View {
     
-    @EnvironmentObject var router: SearchRouter
+    @StateObject var viewModel: FavouritesViewModel = FavouritesViewModel()
     
     var body: some View {
-        Text("Hello, World!")
+        LocationListView(emptyText: Constants.Messages.notFovourites, searchText: "", items: self.viewModel.favourites)
+            .navigationTitle(Constants.Messages.titleFavourites)
     }
 }
 

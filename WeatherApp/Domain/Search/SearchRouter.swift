@@ -12,7 +12,7 @@ class SearchRouter: ObservableObject {
     enum Router: Hashable, Equatable, Identifiable {
         var id: String { String(self.hashValue) }
         
-        case detail
+        case detail(_ item: LocationItem)
         case favourites
         
         static func == (lhs: Router, rhs: Router) -> Bool {
@@ -33,8 +33,8 @@ class SearchRouter: ObservableObject {
     
     @ViewBuilder func view(for route: Router) -> some View {
         switch route {
-        case .detail:
-            DetailView()
+        case .detail(let item):
+            DetailView(item: item)
         case .favourites:
             FavouritesView()
         }
