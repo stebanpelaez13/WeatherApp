@@ -36,6 +36,8 @@ enum Constants {
         static let placeholder = "Search for name city"
         static let notFovourites = "No favourites"
         static let notMatches = "No matches found"
+        
+        static let forecast = "Forecast"
     }
     
     enum Images {

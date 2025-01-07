@@ -7,6 +7,7 @@
 
 protocol CacheManagerProtocol: AnyObject {
     func save(query: String, items: [LocationItem])
+    func remove(query: String)
     func results(query: String) -> [LocationItem]?
 }
 
@@ -19,6 +20,10 @@ class CacheManager: CacheManagerProtocol {
     
     func save(query: String, items: [LocationItem]) {
         self.queryCache[query] = items
+    }
+    
+    func remove(query: String) {
+        self.queryCache[query] = nil
     }
     
     func results(query: String) -> [LocationItem]? {
