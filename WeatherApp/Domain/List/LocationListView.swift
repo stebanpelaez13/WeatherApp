@@ -14,9 +14,7 @@ struct LocationListView: View {
     let emptyText: String
     let searchText: String
     let items: [LocationItem]
-    
-    internal let inspection = Inspection<Self>()
-    
+        
     var body: some View {
         ZStack {
             if self.items.isEmpty {
@@ -29,7 +27,6 @@ struct LocationListView: View {
                 .listStyle(PlainListStyle())
             }
         }
-        .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
     }
     
     @ViewBuilder func contentList(item: LocationItem) -> some View {

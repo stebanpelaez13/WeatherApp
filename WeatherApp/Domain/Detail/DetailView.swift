@@ -14,6 +14,8 @@ struct DetailView: View {
     
     @StateObject var viewModel: DetailViewModel = DetailViewModel()
     
+    internal let inspection = Inspection<Self>()
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 20) {
@@ -24,6 +26,7 @@ struct DetailView: View {
                         self.forecastView
                     }
                 }
+                .accessibilityIdentifier(Constants.Identifiers.detailCurrent)
                 .transition(AnyTransition.opacity.animation(.linear(duration: 0.5)))
                 self.mapView
                     .frame(height: 300)
@@ -47,6 +50,7 @@ struct DetailView: View {
             self.viewModel.loadFavorite(self.item)
             self.viewModel.detailWeather(self.item)
         }
+        .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
     }
     
     private var currentView: some View {

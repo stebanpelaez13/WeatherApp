@@ -11,12 +11,16 @@ struct FavouritesView: View {
     
     @StateObject var viewModel: FavouritesViewModel = FavouritesViewModel()
     
+    internal let inspection = Inspection<Self>()
+
     var body: some View {
         LocationListView(emptyText: Constants.Messages.notFovourites, searchText: "", items: self.viewModel.favourites)
             .navigationTitle(Constants.Messages.titleFavourites)
             .task {
                 self.viewModel.fetchFavourites()
             }
+            .accessibilityIdentifier(Constants.Identifiers.listGroup)
+            .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
     }
 }
 

@@ -48,4 +48,10 @@ enum Constants {
         static let sun = "sun.max.fill"
     }
     
+    enum Identifiers {
+        static let searchGroup = "searchGroup"
+        static let listGroup = "listGroup"
+        static let detailCurrent = "detailCurrent"
+    }
+    
 }
