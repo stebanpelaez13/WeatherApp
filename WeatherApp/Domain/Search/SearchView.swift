@@ -15,30 +15,31 @@ struct SearchView: View {
     @StateObject var viewModel: SearchViewModel = SearchViewModel()
     
     var body: some View {
-        if #available(iOS 16.0, *) {
-            NavigationStack(path: $router.path) {
-                self.contentSearch()
-                    .navigationDestination(for: SearchRouter.Router.self) { route in
-                        self.router.view(for: route)
-                    }
+        Group {
+            if #available(iOS 16.0, *) {
+                NavigationStack(path: $router.path) {
+                    self.contentList
+                        .navigationDestination(for: SearchRouter.Router.self) { route in
+                            self.router.view(for: route)
+                        }
+                }
+            } else {
+                NavigationView {
+                    self.contentList
+                }
+                .navigationViewStyle(.stack)
             }
-        } else {
-            NavigationView {
-                self.contentSearch()
-            }
-            .navigationViewStyle(.stack)
         }
+        .environmentObject(self.router)
     }
     
-    @ViewBuilder func contentSearch() -> some View {
+    private var contentList: some View {
         LocationListView(emptyText: Constants.Messages.notMatches,
                          searchText: self.textObserver.debouncedText,
                          items: self.viewModel.locations)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: self.router.view(for: .favourites)) {
-                    Image(systemName: Constants.Images.startFill)
-                }
+                self.favouriteItem()
             }
         }
         .navigationTitle(Constants.Messages.titleSearch)
@@ -48,7 +49,19 @@ struct SearchView: View {
                 self.viewModel.searchLocations(query: query)
             }
         }
-        .environmentObject(self.router)
+    }
+    
+    @ViewBuilder private func favouriteItem() -> some View {
+        let image = Image(systemName: Constants.Images.startFill)
+        if #available(iOS 16.0, *) {
+            image.onTapGesture {
+                self.router.navigateTo(.favourites)
+            }
+        } else {
+            NavigationLink(destination: self.router.view(for: .favourites)) {
+                image
+            }
+        }
     }
     
 }
@@ -57,6 +70,6 @@ struct SearchView: View {
     let manager = MockApiManager.shared
     manager.mock = MockHelper.listLocation
     
-    let viewModel = SearchViewModel(apiManager: manager)
+    let viewModel = SearchViewModel(apiManager: manager, dataManager: MockDataManager.shared)
     return SearchView(viewModel: viewModel)
 }
