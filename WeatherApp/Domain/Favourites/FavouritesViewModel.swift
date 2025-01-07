@@ -10,5 +10,9 @@ import SwiftUI
 class FavouritesViewModel: BaseViewModel, ObservableObject {
     
     @Published var favourites: [LocationItem] = []
-
+    
+    func fetchFavourites() {
+        self.favourites = self.dataManager.fetchFavourites()
+    }
+    
 }

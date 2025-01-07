@@ -16,7 +16,7 @@ struct LocationItemView: View {
         VStack {
             HighlightedTextView(text: self.item.name, boldText: self.searchText)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text("\(self.item.region), \(self.item.country)")
+            Text(self.item.getLocationRegion())
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.body)
                 .foregroundStyle(Color.gray)

@@ -24,6 +24,10 @@ enum Constants {
         static let dayName = "days"
     }
     
+    enum Storage {
+        static let keyFavourites = "keyFavourites"
+    }
+    
     enum Messages {
         static let titleSplash = "Weather APP"
         static let titleSearch = "Locations"

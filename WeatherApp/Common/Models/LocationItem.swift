@@ -11,4 +11,12 @@ struct LocationItem: Codable, Identifiable {
     let name, region, country: String
     let id: Int
     let lon, lat: Double
+    
+    func getLocationRegion() -> String {
+        if !self.region.isEmpty && self.country.isEmpty {
+            return "\(self.region), \(self.country)"
+        }
+        return "\(self.region) \(self.country)"
+    }
+    
 }
