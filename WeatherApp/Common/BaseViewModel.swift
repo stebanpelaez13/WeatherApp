@@ -13,9 +13,11 @@ class BaseViewModel {
     var cancellables = Set<AnyCancellable>()
     
     let apiManager: APIManagerProtocol
+    let dataManager: DataManagerProtocol
             
-    init(apiManager: APIManagerProtocol = APIManager.shared) {
+    init(apiManager: APIManagerProtocol = APIManager.shared, dataManager: DataManagerProtocol = DataManager.shared) {
         self.apiManager = apiManager
+        self.dataManager = dataManager
     }
     
 }

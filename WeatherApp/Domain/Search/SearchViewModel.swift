@@ -11,6 +11,8 @@ class SearchViewModel: BaseViewModel, ObservableObject {
     
     @Published var locations: [LocationItem] = []
     
+    private let cacheManager: CacheManagerProtocol = CacheManager.shared
+    
     func searchLocations(query: String) {
         
         let cleanQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -20,6 +22,11 @@ class SearchViewModel: BaseViewModel, ObservableObject {
             return
         }
         
+        if let cacheResults = self.cacheManager.results(query: cleanQuery) {
+            self.locations = cacheResults
+            print("Cache query='\(cleanQuery)' : \(cacheResults.count)")
+            return
+        }
         
         let params: [String: String] = [Constants.Network.keyName: Constants.Network.apiKey,
                                         Constants.Network.queryName: cleanQuery]
@@ -43,6 +50,7 @@ class SearchViewModel: BaseViewModel, ObservableObject {
     
     private func processLocations(query: String, _ locations: [LocationItem]) {
         print("Call Api query='\(query)' : \(locations.count)")
+        self.cacheManager.save(query: query, items: locations)
         self.locations = locations
     }
     

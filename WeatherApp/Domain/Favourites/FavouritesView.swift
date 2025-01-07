@@ -14,10 +14,16 @@ struct FavouritesView: View {
     var body: some View {
         LocationListView(emptyText: Constants.Messages.notFovourites, searchText: "", items: self.viewModel.favourites)
             .navigationTitle(Constants.Messages.titleFavourites)
+            .task {
+                self.viewModel.fetchFavourites()
+            }
     }
 }
 
 #Preview {
-    FavouritesView()
+    
+    let viewModel = FavouritesViewModel(apiManager: MockApiManager.shared, dataManager: MockDataManager.shared)
+    
+    FavouritesView(viewModel: viewModel)
         .environmentObject(SearchRouter())
 }
