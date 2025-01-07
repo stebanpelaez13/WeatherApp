@@ -33,7 +33,7 @@ class MockDataManager: DataManagerProtocol {
     }
     
     func isFavorite(_ item: LocationItem) -> Bool {
-        return true
+        return false
     }
     
 }

@@ -66,7 +66,7 @@ final class WeatherAppTests: XCTestCase {
         dataManager.add(item)
         dataManager.remove(item)
         
-        XCTAssertTrue(dataManager.isFavorite(item))
+        XCTAssertFalse(dataManager.isFavorite(item))
     }
     
     func testImageExtension() {

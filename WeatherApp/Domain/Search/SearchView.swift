@@ -14,6 +14,8 @@ struct SearchView: View {
     
     @StateObject var viewModel: SearchViewModel = SearchViewModel()
     
+    internal let inspection = Inspection<Self>()
+    
     var body: some View {
         Group {
             if #available(iOS 16.0, *) {
@@ -30,7 +32,9 @@ struct SearchView: View {
                 .navigationViewStyle(.stack)
             }
         }
+        .accessibilityIdentifier(Constants.Identifiers.searchGroup)
         .environmentObject(self.router)
+        .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
     }
     
     private var contentList: some View {
