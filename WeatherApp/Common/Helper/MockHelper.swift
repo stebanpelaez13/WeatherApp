@@ -35,7 +35,8 @@ enum MockHelper {
         
         let currentFormat = DateHelper.dateToString(now, format: DateHelper.dateFormatTime)
 
-        let current = CurrentItem(lastUpdated: currentFormat, tempC: 15.5, windKph: 3.6, windDir: "E", humidity: 97, cloud: 66, feelslikeC: 15.9, visKM: 10, uv: 1, time: nil, condition: mockCondition)
+        let current = CurrentItem(lastUpdated: currentFormat, tempC: 15.5, windKph: 3.6, windDir: "E", pressureIn: 30.1, precipIn: 0.26, humidity: 97, cloud: 66, feelslikeC: 15.9, visKM: 10, uv: 1, time: nil, condition: mockCondition)
+
         
         for day in 0..<3 {
             let dateDay = calendar.date(byAdding: .day, value: day, to: today)!
@@ -44,7 +45,7 @@ enum MockHelper {
                 let dateHour = calendar.date(byAdding: .hour, value: hour, to: today)!
                 let hourFormat = DateHelper.dateToString(dateHour, format: DateHelper.dateFormatTime)
                 
-                hours.append(CurrentItem(lastUpdated: nil, tempC: 15.8, windKph: 2.2, windDir: "ESE", humidity: 98, cloud: 87, feelslikeC: 15.8, visKM: 10, uv: 0, time: hourFormat, condition: mockCondition))
+                hours.append(CurrentItem(lastUpdated: nil, tempC: 15.8, windKph: 2.2, windDir: "ESE", pressureIn: 30.1, precipIn: 0.26, humidity: 98, cloud: 87, feelslikeC: 15.8, visKM: 10, uv: 0, time: hourFormat, condition: mockCondition))
             }
             let dayFormat = DateHelper.dateToString(dateDay, format: DateHelper.dateFormat)
             

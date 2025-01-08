@@ -23,8 +23,9 @@ struct CurrentItem: Codable, Identifiable {
     let windKph: Double
     //let windDegree: Int
     let windDir: String
-    //let pressureMB: Double
-    //let pressureIn, precipMm, precipIn: Double
+    let pressureIn: Double
+    let precipIn: Double
+    //let pressureMB, precipMm: Double
     let humidity, cloud: Int
     let feelslikeC: Double
     //let feelslikeF, windchillC, windchillF: Double
@@ -45,9 +46,9 @@ struct CurrentItem: Codable, Identifiable {
         //case windDegree = "wind_degree"
         case windDir = "wind_dir"
         //case pressureMB = "pressure_mb"
-        //case pressureIn = "pressure_in"
+        case pressureIn = "pressure_in"
         //case precipMm = "precip_mm"
-        //case precipIn = "precip_in"
+        case precipIn = "precip_in"
         case humidity, cloud
         case feelslikeC = "feelslike_c"
         //case feelslikeF = "feelslike_f"

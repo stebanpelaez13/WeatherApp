@@ -70,23 +70,32 @@ struct DetailView: View {
     }
     
     private var summaryView: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 8) {
-                SummaryView(detail: self.viewModel.value(.sunrise), icon: .sunrise)
-                SummaryView(detail: self.viewModel.value(.sunset), icon: .sunset)
+        VStack(spacing: 16) {
+            HStack {
+                VStack(alignment: .leading) {
+                    SummaryView(detail: self.viewModel.value(.sunrise), icon: .sunrise)
+                    SummaryView(detail: self.viewModel.value(.sunset), icon: .sunset)
+                }
+                .frame(maxWidth: .infinity)
+                VStack(alignment: .leading) {
+                    SummaryView(detail: self.viewModel.value(.uv), icon: .sunMax)
+                    SummaryView(detail: self.viewModel.value(.humidity), icon: .humidity)
+                }
+                .frame(maxWidth: .infinity)
+                VStack(alignment: .leading) {
+                    SummaryView(detail: self.viewModel.value(.wind), icon: .wind)
+                    SummaryView(detail: self.viewModel.value(.windDir), icon: .windDir)
+                }
+                .frame(maxWidth: .infinity)
             }
-            .frame(maxWidth: .infinity)
-            VStack(alignment: .leading, spacing: 8) {
-                SummaryView(detail: self.viewModel.value(.uv), icon: .sunMax)
-                SummaryView(detail: self.viewModel.value(.humidity), icon: .humidity)
-            }
-            .frame(maxWidth: .infinity)
-            VStack(alignment: .leading, spacing: 8) {
-                SummaryView(detail: self.viewModel.value(.wind), icon: .wind)
-                SummaryView(detail: self.viewModel.value(.windDir), icon: .windDir)
-            }
-            .frame(maxWidth: .infinity)
+            Divider()
+            OtherSummaryView(title: Constants.Messages.visibility, detail: self.viewModel.value(.visibility))
+            OtherSummaryView(title: Constants.Messages.pressure, detail: self.viewModel.value(.presure))
+            OtherSummaryView(title: Constants.Messages.precipitation, detail: self.viewModel.value(.precipitation))
         }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
     }
     
     private var forecastView: some View {

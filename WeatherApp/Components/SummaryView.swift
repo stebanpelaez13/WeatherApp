@@ -17,6 +17,7 @@ struct SummaryView: View {
             self.icon
                 .foregroundColor(.redColor)
             Text(self.detail)
+                .font(.callout)
         }
     }
 }
@@ -24,5 +25,3 @@ struct SummaryView: View {
 #Preview {
     SummaryView(detail: "19", icon: .cloudSnow)
 }
-
-
