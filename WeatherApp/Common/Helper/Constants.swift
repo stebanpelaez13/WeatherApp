@@ -38,6 +38,9 @@ enum Constants {
         static let notMatches = "No matches found"
         
         static let forecast = "Forecast"
+        static let visibility = "Visibility"
+        static let pressure = "Pressure"
+        static let precipitation = "Precipitation"
     }
     
     enum Images {

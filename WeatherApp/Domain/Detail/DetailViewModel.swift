@@ -94,6 +94,12 @@ extension DetailViewModel {
             return currentForecast.astro.sunrise
         case .sunset:
             return currentForecast.astro.sunset
+        case .visibility:
+            return "\(current.visKM) KM"
+        case .presure:
+            return "\(current.pressureIn) inHg"
+        case .precipitation:
+            return "\(current.precipIn) in"
         }
     }
     

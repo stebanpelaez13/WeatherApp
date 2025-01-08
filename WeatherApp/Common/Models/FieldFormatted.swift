@@ -17,4 +17,7 @@ enum FieldFormatted {
     case cloud
     case sunrise
     case sunset
+    case visibility
+    case presure
+    case precipitation
 }
