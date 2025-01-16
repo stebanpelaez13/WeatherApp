@@ -1,0 +1,18 @@
+//
+//  Production.xcconfig
+//  WeatherApp
+//
+//  Created by Juan Esteban Peláez Martínez on 13/01/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+API_URL = WWW.GOOGLE.COM
+API_KEY = AJAJA918234KK234
+
+ENVIRONMENT = Production
+
+ENV_NAME = production
+
+PRODUCT_BUNDLE_IDENTIFIER = com.weather.app.$(ENV_NAME)

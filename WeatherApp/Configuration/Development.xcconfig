@@ -1,0 +1,18 @@
+//
+//  Development.xcconfig
+//  WeatherApp
+//
+//  Created by Juan Esteban Peláez Martínez on 13/01/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+API_URL = WWW.GMAIL.COM
+API_KEY = UUU8Q3E8789
+
+ENVIRONMENT = Development
+
+ENV_NAME = development
+
+PRODUCT_BUNDLE_IDENTIFIER = com.weather.app.$(ENV_NAME)

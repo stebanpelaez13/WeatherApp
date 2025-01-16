@@ -15,7 +15,7 @@ class BaseViewModel {
     let apiManager: APIManagerProtocol
     let dataManager: DataManagerProtocol
             
-    init(apiManager: APIManagerProtocol = APIManager.shared, dataManager: DataManagerProtocol = DataManager.shared) {
+    init(apiManager: APIManagerProtocol = APIManager.shared, dataManager: DataManagerProtocol = DataCoreManager.shared) {
         self.apiManager = apiManager
         self.dataManager = dataManager
     }
